@@ -13,6 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
 class Order_element
 {
     /**
+     * You can order one meal many times in diiferebt orders ect.
+     * @ManyToOne(targetEntity="Meal")
+     * @JoinColumn(name="meal_id", referencedColumnName="id")
+     */
+    private $meals;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
