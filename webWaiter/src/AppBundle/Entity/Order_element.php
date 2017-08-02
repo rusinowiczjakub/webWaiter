@@ -12,6 +12,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Order_element
 {
+
+    /**
+     * Many Order_elements have One Client_order.
+     * @ORM\ManyToOne(targetEntity="Client_order")
+     * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
+     */
+    private $order;
+
+
     /**
      * You can order one meal many times in diiferebt orders ect.
      * @ORM\ManyToOne(targetEntity="Meal")
@@ -69,5 +78,28 @@ class Order_element
     {
         return $this->quantity;
     }
-}
 
+    /**
+     * Set order
+     *
+     * @param \AppBundle\Entity\Client_order $order
+     *
+     * @return Order_element
+     */
+    public function setOrder(\AppBundle\Entity\Client_order $order = null)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return \AppBundle\Entity\Client_order
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+}

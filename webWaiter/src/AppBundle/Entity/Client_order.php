@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Client_order
 {
+
+
+
     /**
      * Many Orders have One User.
      * @ORM\ManyToOne(targetEntity="fos_user", inversedBy="orders")
@@ -71,4 +74,3 @@ class Client_order
         return $this->price;
     }
 }
-
