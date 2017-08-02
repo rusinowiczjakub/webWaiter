@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Order_element
@@ -41,6 +42,18 @@ class Order_element
      * @var int
      *
      * @ORM\Column(name="quantity", type="integer")
+     * @Assert\NotNull()
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     * @Assert\GreaterThan(
+     *     value = 0
+     * )
+     *  @Assert\LessThan(
+     *     value = 200
+     * )
+     *
      */
     private $quantity;
 
