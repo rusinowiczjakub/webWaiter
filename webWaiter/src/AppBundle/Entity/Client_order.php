@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Client_order
@@ -19,6 +20,7 @@ class Client_order
      * Many Orders have One User.
      * @ORM\ManyToOne(targetEntity="fos_user", inversedBy="orders")
      * @ORM\JoinColumn(name="fos_user_id", referencedColumnName="id")
+     * @Assert\NotNull()
      */
     private $fos_user;
 
@@ -34,14 +36,14 @@ class Client_order
 
     /**
      * @var string
-     *
+     *@Assert\NotNull()
      * @ORM\Column(name="price", type="decimal", precision=6, scale=2)
      */
     private $price;
 
     /**
      * @var int
-     *
+     *@Assert\NotNull()
      * @ORM\Column(name="status", type="integer")
      */
     private $status;

@@ -18,6 +18,7 @@ class Order_element
      * Many Order_elements have One Client_order.
      * @ORM\ManyToOne(targetEntity="Client_order")
      * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
+     * @Assert\NotNull()
      */
     private $order;
 
@@ -26,6 +27,7 @@ class Order_element
      * You can order one meal many times in diiferebt orders ect.
      * @ORM\ManyToOne(targetEntity="Meal")
      * @ORM\JoinColumn(name="meal_id", referencedColumnName="id")
+     * @Assert\NotNull()
      */
     private $meals;
 

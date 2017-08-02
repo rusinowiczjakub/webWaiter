@@ -18,14 +18,13 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  */
-class fos_user extends BaseUser
+class User extends BaseUser
 {
     /**
      * One User has Many Orders.
      * @ORM\OneToMany(targetEntity="Client_order", mappedBy="fos_user")
      */
     private $orders;
-    // ...
 
     public function __construct() {
         parent::__construct();
