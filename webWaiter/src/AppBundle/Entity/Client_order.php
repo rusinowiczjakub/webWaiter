@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Client_order
 {
+
+
+
     /**
      * @var int
      *
@@ -63,4 +66,3 @@ class Client_order
         return $this->price;
     }
 }
-
