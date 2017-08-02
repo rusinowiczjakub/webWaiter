@@ -61,7 +61,7 @@ class Meal
      * @var string
      *
      * @ORM\Column(name="price", type="decimal", precision=5, scale=2)
-     * @Assert\Type("decimal")
+     * @Assert\Type("double")
      * @Assert\Range(
      *     min="0.01",
      *     max="9999.99")
