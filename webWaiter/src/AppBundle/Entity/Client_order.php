@@ -19,7 +19,7 @@ class Client_order
     /**
      * Many Orders have One User.
      * @ORM\ManyToOne(targetEntity="User", inversedBy="orders")
-     * @ORM\JoinColumn(name="fos_user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @Assert\NotNull()
      */
     private $User;
@@ -81,30 +81,6 @@ class Client_order
     public function getPrice()
     {
         return $this->price;
-    }
-
-    /**
-     * Set fosUser
-     *
-     * @param \AppBundle\Entity\fos_user $fosUser
-     *
-     * @return Client_order
-     */
-    public function setFosUser(\AppBundle\Entity\fos_user $fosUser = null)
-    {
-        $this->fos_user = $fosUser;
-
-        return $this;
-    }
-
-    /**
-     * Get fosUser
-     *
-     * @return \AppBundle\Entity\fos_user
-     */
-    public function getFosUser()
-    {
-        return $this->fos_user;
     }
 
     /**

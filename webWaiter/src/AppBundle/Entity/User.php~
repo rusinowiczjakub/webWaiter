@@ -25,7 +25,6 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Client_order", mappedBy="User")
      */
     private $orders;
-    // ...
 
     public function __construct() {
         parent::__construct();

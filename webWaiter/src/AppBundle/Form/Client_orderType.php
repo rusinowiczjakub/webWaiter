@@ -13,7 +13,7 @@ class Client_orderType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('price')->add('status')->add('fos_user');
+        $builder->add('price')->add('status')->add('User');
     }
     
     /**
