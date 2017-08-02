@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Meal
@@ -34,6 +35,12 @@ class Meal
      * @var string
      *
      * @ORM\Column(name="meal_name", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Type("string")
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *     min=1,
+     *     max=255)
      */
     private $mealName;
 
@@ -41,6 +48,12 @@ class Meal
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\NotBlank()
+     * @Assert\Type("string")
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *     min=1,
+     *     max=300)
      */
     private $description;
 
@@ -48,6 +61,11 @@ class Meal
      * @var string
      *
      * @ORM\Column(name="price", type="decimal", precision=5, scale=2)
+     * @Assert\Type("decimal")
+     * @Assert\Range(
+     *     min="0.01",
+     *     max="9999.99")
+     * @Assert\NotNull()
      */
     private $price;
 
