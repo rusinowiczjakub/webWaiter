@@ -14,8 +14,8 @@ class Order_element
 {
     /**
      * You can order one meal many times in diiferebt orders ect.
-     * @ManyToOne(targetEntity="Meal")
-     * @JoinColumn(name="meal_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Meal")
+     * @ORM\JoinColumn(name="meal_id", referencedColumnName="id")
      */
     private $meals;
 

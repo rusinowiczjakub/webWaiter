@@ -13,6 +13,14 @@ use Doctrine\ORM\Mapping as ORM;
 class Client_order
 {
     /**
+     * Many Orders have One User.
+     * @ORM\ManyToOne(targetEntity="fos_user", inversedBy="orders")
+     * @ORM\JoinColumn(name="fos_user_id", referencedColumnName="id")
+     */
+    private $fos_user;
+
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")

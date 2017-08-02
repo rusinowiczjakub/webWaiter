@@ -12,13 +12,25 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  */
-class fosUser extends BaseUser
+class fos_user extends BaseUser
 {
+    /**
+     * One User has Many Orders.
+     * @ORM\OneToMany(targetEntity="Client_order", mappedBy="fos_user")
+     */
+    private $orders;
+    // ...
+
+    public function __construct() {
+        $this->orders = new ArrayCollection();
+    }
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
