@@ -116,7 +116,7 @@ class Client_order
      */
     public function setUser(\AppBundle\Entity\User $user = null)
     {
-        $this->User = $user;
+        $this->user = $user;
 
         return $this;
     }
@@ -128,6 +128,6 @@ class Client_order
      */
     public function getUser()
     {
-        return $this->User;
+        return $this->user;
     }
 }

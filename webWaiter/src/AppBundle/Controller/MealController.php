@@ -133,4 +133,17 @@ class MealController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * @Route("/show/{category}", name="show_meals_by_category")
+     */
+    public function showByCategoryAction($category)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $meals = $em->getRepository('AppBundle:Meal')->findByCategory($category);
+
+        return $this->render('meal/show_meals_by_category.html.twig', array('meals'=>$meals));
+    }
+
 }

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Meal</h1>
+
+    <table>
+        <tbody>
+        {% for meal in meals %}
+        <tr>
+            <th>Name</th>
+            <td>{{ meal.mealname }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
