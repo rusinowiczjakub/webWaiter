@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,7 +14,10 @@ class MealType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('mealName')->add('description')->add('price')->add('img')->add('category');
+        $builder->add('mealName')->add('description')->add('price')->add('img')->add('category', EntityType::class, array(
+            'class'=>'AppBundle:Category',
+            'choice_label'=>'name'
+        ));
     }
     
     /**
