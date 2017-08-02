@@ -18,11 +18,11 @@ class Client_order
 
     /**
      * Many Orders have One User.
-     * @ORM\ManyToOne(targetEntity="fos_user", inversedBy="orders")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="orders")
      * @ORM\JoinColumn(name="fos_user_id", referencedColumnName="id")
      * @Assert\NotNull()
      */
-    private $fos_user;
+    private $User;
 
 
     /**
@@ -129,5 +129,29 @@ class Client_order
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Client_order
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->User = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->User;
     }
 }
