@@ -22,7 +22,7 @@ class Client_order
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @Assert\NotNull()
      */
-    private $User;
+    private $user;
 
 
     /**
