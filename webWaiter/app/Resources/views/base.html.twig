@@ -1,13 +1,82 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <style>
+        .link-button-color {
+            color: #fff;
+        }
+
+        .link-button-color:hover {
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <br>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-admin">
+                        <span class="sr-only">Toggle Menu</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand">WebWaiter <span class="glyphicon glyphicon-hand-up"></span></a>
+                    <p class="navbar-text">It's XXI century.</p>
+                </div><!--/.navbar-header -->
+                <div class="collapse navbar-collapse" id="navbar-admin">
+                    <!---------------------------------MENU--------------------------------->
+                    <ul class="nav navbar-nav">
+
+
+                        <!------------------------------categories------------------------>
+
+
+                        {% for category in categories %}
+
+                            {#{{ path("show_meals_by_category", { 'category_id': category.id }) }}#}
+                            <li><a href="#">{{ category.name }}</a></li>
+
+                        {% endfor %}
+
+                        <li><a href="#" class="hidden-lg hidden-md"><span class="glyphicon glyphicon-lock"></span> Log
+                                In</a></li>
+                        <li><a href="#" class="hidden-lg hidden-md"><span class="glyphicon glyphicon-pencil"></span>
+                                Sign Up</a></li>
+                    </ul>
+
+                    <!---------------------------------LOGIN - SIGNUP--------------------------------->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="hidden-sm hidden-xs">
+                            <button type="button" class="btn btn-success navbar-btn">
+                                <a href="" class="link-button-color"><span class="glyphicon glyphicon-lock"></span> Log
+                                    In</a>
+                            </button>
+                            <button type="button" class="btn btn-danger navbar-btn">
+                                <a href="" class="link-button-color"><span class="glyphicon glyphicon-pencil"></span>
+                                    Sign Up</a>
+                            </button>
+                        </li>
+                    </ul>
+
+                </div><!--/.container-fluid -->
+        </nav><!--/.navbar -->
+    </div>
+</div>
+
+
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
 </html>
