@@ -16,13 +16,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="User")
+ * @ORM\Table(name="user")
  */
 class User extends BaseUser
 {
     /**
      * One User has Many Orders.
-     * @ORM\OneToMany(targetEntity="Client_order", mappedBy="User")
+     * @ORM\OneToMany(targetEntity="Client_order", mappedBy="user")
      */
     private $orders;
 
@@ -45,7 +45,7 @@ class User extends BaseUser
      *
      * @param \AppBundle\Entity\Client_order $order
      *
-     * @return fos_user
+     * @return user
      */
     public function addOrder(\AppBundle\Entity\Client_order $order)
     {

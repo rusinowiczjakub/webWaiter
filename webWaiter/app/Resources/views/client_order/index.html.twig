@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Client_orders list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client_order in client_orders %}
+            <tr>
+                <td><a href="{{ path('client_order_show', { 'id': client_order.id }) }}">{{ client_order.id }}</a></td>
+                <td>{{ client_order.price }}</td>
+                <td>{{ client_order.status }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('client_order_show', { 'id': client_order.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('client_order_edit', { 'id': client_order.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('client_order_new') }}">Create a new client_order</a>
+        </li>
+    </ul>
+{% endblock %}

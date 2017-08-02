@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Client_order</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ client_order.id }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ client_order.price }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ client_order.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('client_order_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('client_order_edit', { 'id': client_order.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
