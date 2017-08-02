@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  *
  * @Route("meal")
  */
-class MealController extends Controller
+class MealController extends BaseController
 {
     /**
      * Lists all meal entities.
@@ -143,7 +143,7 @@ class MealController extends Controller
 
         $meals = $em->getRepository('AppBundle:Meal')->findByCategory($category);
 
-        return $this->render('meal/show_meals_by_category.html.twig', array('meals'=>$meals));
+        return $this->render('meal/show_meals_by_category.html.twig', array('meals'=>$meals, 'categories'=>$this->getAllCategories()));
     }
 
 }

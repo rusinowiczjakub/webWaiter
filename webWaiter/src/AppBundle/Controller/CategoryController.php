@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  *
  * @Route("category")
  */
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     /**
      * Lists all category entities.

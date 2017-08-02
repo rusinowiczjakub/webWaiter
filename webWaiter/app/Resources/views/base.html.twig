@@ -43,32 +43,46 @@
                         <!------------------------------categories------------------------>
 
 
+
+                        {% if categories is defined %}
                         {% for category in categories %}
 
-                            {#{{ path("show_meals_by_category", { 'category_id': category.id }) }}#}
-                            <li><a href="#">{{ category.name }}</a></li>
+
+                            <li><a href="{{ path("show_meals_by_category", { 'category': category.id }) }}">{{ category.name }}</a></li>
 
                         {% endfor %}
+                        {%  endif %}
 
-                        <li><a href="#" class="hidden-lg hidden-md"><span class="glyphicon glyphicon-lock"></span> Log
-                                In</a></li>
-                        <li><a href="#" class="hidden-lg hidden-md"><span class="glyphicon glyphicon-pencil"></span>
-                                Sign Up</a></li>
+                        {% if not app.user %} {#if logged #}
+                            <li><a href="{{ path('fos_user_security_login') }}" class="hidden-lg hidden-md"><span class="glyphicon glyphicon-lock"></span>
+                                    Log
+                                    In</a></li>
+                            <li><a href="{{ path("fos_user_registration_register") }}" class="hidden-lg hidden-md"><span
+                                            class="glyphicon glyphicon-pencil"></span>
+                                    Sign Up</a></li>
+
+                        {% endif %}
+
                     </ul>
 
                     <!---------------------------------LOGIN - SIGNUP--------------------------------->
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="hidden-sm hidden-xs">
-                            <button type="button" class="btn btn-success navbar-btn">
-                                <a href="" class="link-button-color"><span class="glyphicon glyphicon-lock"></span> Log
-                                    In</a>
-                            </button>
-                            <button type="button" class="btn btn-danger navbar-btn">
-                                <a href="" class="link-button-color"><span class="glyphicon glyphicon-pencil"></span>
-                                    Sign Up</a>
-                            </button>
-                        </li>
-                    </ul>
+                    {% if not app.user %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="hidden-sm hidden-xs">
+                                <button type="button" class="btn btn-success navbar-btn">
+                                    <a href="{{ path('fos_user_security_login') }}" class="link-button-color"><span class="glyphicon glyphicon-lock"></span>
+                                        Log
+                                        In</a>
+                                </button>
+                                <button type="button" class="btn btn-danger navbar-btn">
+                                    <a href="{{ path("fos_user_registration_register") }}" class="link-button-color"><span
+                                                class="glyphicon glyphicon-pencil"></span>
+                                        Sign Up</a>
+                                </button>
+                            </li>
+                        </ul>
+                    {% endif %}
+
 
                 </div><!--/.container-fluid -->
         </nav><!--/.navbar -->

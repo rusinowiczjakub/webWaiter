@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  *
  * @Route("user")
  */
-class UserController extends Controller
+class UserController extends BaseController
 {
     /**
      * Lists all user entities.

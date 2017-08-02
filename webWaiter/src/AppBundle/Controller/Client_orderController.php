@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  *
  * @Route("client_order")
  */
-class Client_orderController extends Controller
+class Client_orderController extends BaseController
 {
     /**
      * Lists all client_order entities.
