@@ -1,17 +1,37 @@
 {% extends 'base.html.twig' %}
 
+
+
+
 {% block body %}
-    <h1>Meal</h1>
-
-    <table>
-        <tbody>
         {% for meal in meals %}
-        <tr>
-            <th>Name</th>
-            <td>{{ meal.mealname }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-2">
+            <div class="productbox">
+                <img src="http://lorempixel.com/460/250/" class="img-responsive">
+                <div class="producttitle">{{ meal.mealname }}</div>
+                {#<p class="text-justify">The place to be.</p>#}
+                <description>
+                    <p class="wrap">{{ meal.description }}</p>
+                </description>
 
+
+                <div class="productprice">
+                    <div>
+                        <strong>Price: {{ meal.price }} $</strong><br>
+                    </div>
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-success btm-sm" role="button">Order <span class="glyphicon glyphicon-cutlery"></span></a>
+                    </div>
+                    <div class="pricetext">
+                        <a href="" class="btn btn-warning btm-sm" role="button">View <span class="glyphicon glyphicon-info-sign"></span></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        {% endfor %}
 {% endblock %}
+
