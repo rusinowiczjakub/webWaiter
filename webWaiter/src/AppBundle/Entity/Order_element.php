@@ -102,4 +102,28 @@ class Order_element
     {
         return $this->order;
     }
+
+    /**
+     * Set meals
+     *
+     * @param \AppBundle\Entity\Meal $meals
+     *
+     * @return Order_element
+     */
+    public function setMeals(\AppBundle\Entity\Meal $meals = null)
+    {
+        $this->meals = $meals;
+
+        return $this;
+    }
+
+    /**
+     * Get meals
+     *
+     * @return \AppBundle\Entity\Meal
+     */
+    public function getMeals()
+    {
+        return $this->meals;
+    }
 }

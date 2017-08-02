@@ -39,6 +39,13 @@ class Client_order
      */
     private $price;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status;
+
 
     /**
      * Get id
@@ -72,5 +79,53 @@ class Client_order
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * Set fosUser
+     *
+     * @param \AppBundle\Entity\fos_user $fosUser
+     *
+     * @return Client_order
+     */
+    public function setFosUser(\AppBundle\Entity\fos_user $fosUser = null)
+    {
+        $this->fos_user = $fosUser;
+
+        return $this;
+    }
+
+    /**
+     * Get fosUser
+     *
+     * @return \AppBundle\Entity\fos_user
+     */
+    public function getFosUser()
+    {
+        return $this->fos_user;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return Client_order
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }
