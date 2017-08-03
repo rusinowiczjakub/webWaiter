@@ -6,7 +6,8 @@ use AppBundle\Entity\Meal;
 use AppBundle\Entity\Order_element;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Order_element controller.
@@ -36,18 +37,23 @@ class Order_elementController extends BaseController
      * Creates a new order_element entity.
      *
      * @Route("/new", name="order_element_new")
-     * @Method({"GET", "POST"})
+     * @Method({"POST", "GET"})
      */
     public function newAction(Request $request)
     {
 
-
+        $quantity = $request->request->get('quantity');
+//        $meal = $request->request->get('meal');
+        $mealObject = $this->getDoctrine()->getRepository('AppBundle:Meal')->find($meal);
+        $meal = $session->get('meal');
+        dump($meal);
+        die;
 
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);
         $order_element = new Order_element();
-        $order_element->setQuantity($request->request->get('quantity'));
-        $order_element->setMeals($meal);
+        $order_element->setQuantity($quantity);
+        $order_element->setMeals($mealObject);
         $order_element->setOrder($order[0]);
         $this->save($order_element);
 

@@ -41,12 +41,15 @@ class Client_orderController extends BaseController
      */
     public function newAction(Request $request)
     {
+
+        $quantity = $request->request->get('quantity');
+        $meal = $request->request->get('meal');
+
+        $session = $this->getRequest()->getSession();
+        $session->set('meal', $meal);
+
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);
-
-        dump($request->request->get('quantity'));
-        dump($request->request->get('meal'));
-        die;
 
         if(empty($order)) {
             $client_order = new Client_order();
@@ -56,7 +59,7 @@ class Client_orderController extends BaseController
 
             $this->save($client_order);
         }
-        return $this->redirectToRoute('order_element_new', ['meal'=>$meal->getId()]);
+        return $this->redirectToRoute('order_element_new');
     }
 
     /**
