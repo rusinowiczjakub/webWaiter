@@ -39,9 +39,12 @@ class Order_elementController extends BaseController
      */
     public function newAction(Request $request)
     {
+        $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findByStatus(0);
+        $meal = $this->getDoctrine()->getRepository('AppBundle:Meal')->find($_GET['meal']);
         $order_element = new Order_element();
-        $form = $this->createForm('AppBundle\Form\Order_elementType', $order_element);
-        $form->handleRequest($request);
+        $order_element->setQuantity(1);
+        $order_element->setMeals($meal);
+        $order_element->setOrder();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

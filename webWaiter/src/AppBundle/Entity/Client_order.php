@@ -90,7 +90,7 @@ class Client_order
      *
      * @return Client_order
      */
-    public function setStatus($status)
+    public function setStatus($status=0)
     {
         $this->status = $status;
 
