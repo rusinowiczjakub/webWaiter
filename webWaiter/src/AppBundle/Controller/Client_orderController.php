@@ -71,15 +71,15 @@ class Client_orderController extends BaseController
      * @Route("/{id}", name="client_order_show")
      * @Method("GET")
      */
-    public function showAction(Client_order $client_order)
-    {
-        $deleteForm = $this->createDeleteForm($client_order);
-
-        return $this->render('client_order/show.html.twig', array(
-            'client_order' => $client_order,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
+//    public function showAction()
+//    {
+//        $deleteForm = $this->createDeleteForm($client_order);
+//
+//        return $this->render('client_order/show.html.twig', array(
+//            'client_order' => $client_order,
+//            'delete_form' => $deleteForm->createView(),
+//        ));
+//    }
 
     /**
      * Displays a form to edit an existing client_order entity.
@@ -109,21 +109,29 @@ class Client_orderController extends BaseController
     /**
      * Deletes a client_order entity.
      *
-     * @Route("/{id}", name="client_order_delete")
-     * @Method("DELETE")
+     * @Route("/delete", name="client_order_delete")
      */
-    public function deleteAction(Request $request, Client_order $client_order)
+    public function deleteAction()
     {
-        $form = $this->createDeleteForm($client_order);
-        $form->handleRequest($request);
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if(!empty($order)){
+            $order_elements = $this->getDoctrine()->getRepository('AppBundle:Order_element')->findBy(['order'=>$order]);
             $em = $this->getDoctrine()->getManager();
-            $em->remove($client_order);
+            foreach($order_elements as $element){
+            $em->remove($element);
+            $em->flush();
+            }
+            $em->remove($order[0]);
             $em->flush();
         }
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($order[0]);
+            $em->flush();
 
-        return $this->redirectToRoute('client_order_index');
+
+        return $this->redirectToRoute('homepage');
     }
 
     /**
@@ -141,4 +149,6 @@ class Client_orderController extends BaseController
             ->getForm()
         ;
     }
+
+
 }

@@ -20,18 +20,23 @@ class Order_elementController extends BaseController
     /**
      * Lists all order_element entities.
      *
-     * @Route("/", name="order_element_index")
+     * @Route("/order_info", name="order_info")
      * @Method("GET")
      */
-    public function indexAction()
+    public function orderInfoAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $order_elements = $em->getRepository('AppBundle:Order_element')->findAll();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);
 
-        return $this->render('order_element/index.html.twig', array(
-            'order_elements' => $order_elements,
-        ));
+        $order_elements = $this->getDoctrine()->getRepository('AppBundle:Order_element')->findBy(['order'=>$order]);
+
+//        dump($price);
+//        die;
+
+
+        return $this->render('/order_element/order_info.html.twig', ['order_elements'=>$order_elements]);
     }
 
     /**
@@ -137,4 +142,5 @@ class Order_elementController extends BaseController
             ->getForm()
         ;
     }
+
 }
