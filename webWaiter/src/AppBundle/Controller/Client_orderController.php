@@ -39,17 +39,17 @@ class Client_orderController extends BaseController
      */
     public function newAction(Request $request)
     {
+        $orders = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findByStatus(0);
+
+        if(!$orders){
         $client_order = new Client_order();
         $client_order->setPrice(0);
         $client_order->setUser($this->get('security.token_storage')->getToken()->getUser());
-        $client_order->setStatus();
+        $client_order->setStatus(0);
+        }
 
 
-
-        return $this->render('client_order/new.html.twig', array(
-            'client_order' => $client_order,
-            'form' => $form->createView(),
-        ));
+        return $this->redirectToRoute('order_element_new');
     }
 
     /**
