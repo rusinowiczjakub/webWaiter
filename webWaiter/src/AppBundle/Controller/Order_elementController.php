@@ -97,20 +97,15 @@ class Order_elementController extends BaseController
      * Deletes a order_element entity.
      *
      * @Route("/{id}", name="order_element_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, Order_element $order_element)
     {
-        $form = $this->createDeleteForm($order_element);
-        $form->handleRequest($request);
+        $elementToDelete = $this->getDoctrine()->getRepository('AppBundle:Order_element')->find($order_element);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($elementToDelete);
+        $em->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($order_element);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('order_element_index');
+        return $this->redirect(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH));
     }
 
     /**

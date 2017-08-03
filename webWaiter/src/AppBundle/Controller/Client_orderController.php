@@ -52,10 +52,6 @@ class Client_orderController extends BaseController
 
             $this->save($client_order);
         }
-//        dump($this->get('security.token_storage')->getToken()->getUser());
-//        dump($order);
-//        return new Response('raz');
-
         return $this->redirectToRoute('order_element_new', ['meal'=>$meal->getId()]);
     }
 
