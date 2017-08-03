@@ -3,9 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Client_order;
+use AppBundle\Entity\Meal;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Client_order controller.
@@ -34,22 +36,27 @@ class Client_orderController extends BaseController
     /**
      * Creates a new client_order entity.
      *
-     * @Route("/new", name="client_order_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new/{meal}", name="client_order_new")
+     * @Method("GET")
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Meal $meal)
     {
-        $client_order = new Client_order();
-        $client_order->setPrice(0);
-        $client_order->setUser($this->get('security.token_storage')->getToken()->getUser());
-        $client_order->setStatus();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);
 
+        if(empty($order)) {
+            $client_order = new Client_order();
+            $client_order->setPrice(0);
+            $client_order->setUser($user);
+            $client_order->setStatus(0);
 
+            $this->save($client_order);
+        }
+//        dump($this->get('security.token_storage')->getToken()->getUser());
+//        dump($order);
+//        return new Response('raz');
 
-        return $this->render('client_order/new.html.twig', array(
-            'client_order' => $client_order,
-            'form' => $form->createView(),
-        ));
+        return $this->redirectToRoute('order_element_new', ['meal'=>$meal->getId()]);
     }
 
     /**

@@ -11,4 +11,12 @@ class BaseController extends Controller
         $em = $this->getDoctrine()->getRepository("AppBundle\Entity\Category");
         return $em->findAll();
     }
+
+    protected function save($object){
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($object);
+        $em->flush();
+
+        return true;
+    }
 }
