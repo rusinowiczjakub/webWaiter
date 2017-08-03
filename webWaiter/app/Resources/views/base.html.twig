@@ -5,7 +5,7 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
 
 
-    {% include "style/navigation_style.html.twig"  %}
+    {% include "style/navigation_style.html.twig" %}
 
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
@@ -16,9 +16,9 @@
 <body>
 
 {% if order_element is defined %}
-{% include "navigation/navigation.html.twig" with [{'order_element': order_element}] %}
+    {% include "navigation/navigation.html.twig" with [{'order_element': order_element}] %}
 {% else %}
-{% include "navigation/navigation.html.twig" %}
+    {% include "navigation/navigation.html.twig" %}
 {% endif %}
 {% include "messages/fosUSerMessage.html.twig" %}
 
@@ -26,14 +26,15 @@
 <div class="container">
     {% block fos_user_content %}
     {% endblock fos_user_content %}
-</div>l
-
+</div>
+l
 
 
 <div class="container">
-{% block body %}
-{% endblock %}
+    {% block body %}
+    {% endblock %}
 </div>
+
 {% block javascripts %}{% endblock %}
 </body>
 </html>
