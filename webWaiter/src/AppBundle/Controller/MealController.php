@@ -143,7 +143,11 @@ class MealController extends BaseController
 
         $meals = $em->getRepository('AppBundle:Meal')->findByCategory($category);
 
-        return $this->render('meal/show_meals_by_category.html.twig', array('meals'=>$meals, 'categories'=>$this->getAllCategories()));
+
+        $client_order = $this->getUserOrder();
+        $allElements = $this->getDoctrine()->getManager()->getRepository("AppBundle:Order_element")->findBy(['order'=>$client_order]);
+
+        return $this->render('meal/show_meals_by_category.html.twig', array('meals'=>$meals, 'categories'=>$this->getAllCategories(), 'order_element'=>$allElements));
     }
 
 }
