@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Client_order controller.
@@ -45,8 +46,10 @@ class Client_orderController extends BaseController
         $quantity = $request->request->get('quantity');
         $meal = $request->request->get('meal');
 
-        $session = $this->getRequest()->getSession();
+        $session = new Session();
+
         $session->set('meal', $meal);
+        $session->set('quantity', $quantity);
 
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);

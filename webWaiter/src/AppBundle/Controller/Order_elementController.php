@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Order_element controller.
@@ -42,21 +43,25 @@ class Order_elementController extends BaseController
     public function newAction(Request $request)
     {
 
-        $quantity = $request->request->get('quantity');
-//        $meal = $request->request->get('meal');
-        $mealObject = $this->getDoctrine()->getRepository('AppBundle:Meal')->find($meal);
+        $session = new Session();
+
         $meal = $session->get('meal');
-        dump($meal);
-        die;
+        $quantity = $session->get('quantity');
+        $mealObject = $this->getDoctrine()->getRepository('AppBundle:Meal')->findBy(['id'=>$meal]);
+
 
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);
+
+
         $order_element = new Order_element();
         $order_element->setQuantity($quantity);
-        $order_element->setMeals($mealObject);
+        $order_element->setMeals($mealObject[0]);
         $order_element->setOrder($order[0]);
         $this->save($order_element);
 
+        $session->remove('meal');
+        $session->remove('quantity');
 
         return $this->redirect(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH));
     }
