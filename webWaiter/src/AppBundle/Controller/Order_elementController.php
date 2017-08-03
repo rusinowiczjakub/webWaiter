@@ -35,21 +35,24 @@ class Order_elementController extends BaseController
     /**
      * Creates a new order_element entity.
      *
-     * @Route("/new/{meal}", name="order_element_new")
+     * @Route("/new", name="order_element_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, Meal $meal)
+    public function newAction(Request $request)
     {
+
+
+
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);
         $order_element = new Order_element();
-        $order_element->setQuantity(1);
+        $order_element->setQuantity($request->request->get('quantity'));
         $order_element->setMeals($meal);
         $order_element->setOrder($order[0]);
         $this->save($order_element);
 
 
-        return $this->redirectToRoute('homepage');
+        return $this->redirect(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH));
     }
 
     /**
