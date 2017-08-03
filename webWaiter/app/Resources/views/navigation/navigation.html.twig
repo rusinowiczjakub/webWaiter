@@ -1,0 +1,112 @@
+<div class="container">
+    <div class="row">
+        <br>
+        <!---------------------------------MENU--------------------------------->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="/" class="navbar-brand">WebWaiter <span class="glyphicon glyphicon-hand-up"></span></a>
+                    <p class="navbar-text">It's XXI century.</p>
+                </div><!--/.navbar-header -->
+                <!------------------------------categories------------------------>
+                <div class="collapse navbar-collapse" id="navbar-admin">
+                    {% if categories is defined %}
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"> <span class="glyphicon glyphicon-cutlery"></span> Menu<span
+                                            class="caret"></span></a>
+                                <ul class="dropdown-menu dropdown-cart" role="menu">
+
+                                    {% for category in categories %}
+
+
+                                        <li>
+                                            <a href="{{ path("show_meals_by_category", { 'category': category.id }) }}">{{ category.name }}</a>
+                                        </li>
+
+                                    {% endfor %}
+
+                                </ul>
+                            </li>
+                        </ul>
+
+                    {% endif %}
+
+
+                    {% if not app.user %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{ path('fos_user_security_login') }}" class="hidden-lg hidden-md"><span
+                                            class="glyphicon glyphicon-lock"></span>
+                                    Log
+                                    In</a></li>
+                            <li><a href="{{ path("fos_user_registration_register") }}" class="hidden-lg hidden-md"><span
+                                            class="glyphicon glyphicon-pencil"></span>
+                                    Sign Up</a></li>
+                        </ul>
+
+                    {% endif %}
+
+                    <!---------------------------------LOGIN - SIGNUP--------------------------------->
+                    {% if not app.user %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="hidden-sm hidden-xs">
+                                <button type="button" class="btn btn-success navbar-btn">
+                                    <a href="{{ path('fos_user_security_login') }}" class="link-button-color"><span
+                                                class="glyphicon glyphicon-lock"></span>
+                                        Log
+                                        In</a>
+                                </button>
+                                <button type="button" class="btn btn-danger navbar-btn">
+                                    <a href="{{ path("fos_user_registration_register") }}"
+                                       class="link-button-color"><span
+                                                class="glyphicon glyphicon-pencil"></span>
+                                        Sign Up</a>
+                                </button>
+                            </li>
+                        </ul>
+
+                    {% else %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="hidden-sm hidden-xs">
+                                <button type="button" class="btn btn-danger navbar-btn">
+                                    <a href="{{ path('fos_user_security_logout') }}" class="link-button-color"><span
+                                                class="glyphicon glyphicon-log-out"></span>
+                                        Log
+                                        Out</a>
+                                </button>
+                            </li>
+                        </ul>
+
+                        <!----------------------------ORDER ELEMENTS INFO ON NAVBAR------------------------------->
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"> <span class="glyphicon glyphicon-cutlery"></span> Your
+                                    Order<span class="caret"></span></a>
+                                <ul class="dropdown-menu dropdown-cart" role="menu">
+                                    <li>
+                                      <span class="item">
+                                            <span class="item-left">
+                                                <img src="http://lorempixel.com/50/50/" alt=""/>
+                                                <span class="item-info">
+                                                    <span>ELEMENT</span><br>
+                                                </span>
+                                            </span>
+                                            <span class="item-right">
+                                                <button class="btn btn-xs btn-danger pull-right">x</button>
+                                            </span>
+                                          <hr>
+
+                                    </span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    {% endif %}
+
+                </div><!--/.container-fluid -->
+            </div>
+        </nav><!--/.navbar -->
+    </div>
+</div>

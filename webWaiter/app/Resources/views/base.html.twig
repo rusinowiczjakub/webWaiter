@@ -3,53 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <title>{% block title %}Welcome!{% endblock %}</title>
-    <style>
-        .link-button-color {
-            color: #fff;
-        }
 
-        .link-button-color:hover {
-            text-decoration: none;
-            color: #333;
-        }
 
-        .productbox {
-            background-color: #ffffff;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #cfcfcf;
-            -moz-box-shadow: 2px 2px 4px 0px #cfcfcf;
-            -webkit-box-shadow: 2px 2px 4px 0px #cfcfcf;
-            -o-box-shadow: 2px 2px 4px 0px #cfcfcf;
-            box-shadow: 2px 2px 4px 0px #cfcfcf;
-            filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=4);
-        }
+    {% include "style/navigation_style.html.twig"  %}
 
-        .producttitle {
-            font-weight: bold;
-            font-size: 1.2em;
-            padding: 5px 0 5px 0;
-        }
-
-        .producttext {
-
-        }
-
-        .productprice {
-            border-top: 1px solid #dadada;
-            padding-top: 5px;
-        }
-
-        .pricetext {
-            font-weight: bold;
-            font-size: 1.4em;
-        }
-
-        .wrap {
-            word-wrap: break-word;
-        }
-
-    </style>
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -57,122 +14,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <br>
-        <!---------------------------------MENU--------------------------------->
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a href="/" class="navbar-brand">WebWaiter <span class="glyphicon glyphicon-hand-up"></span></a>
-                    <p class="navbar-text">It's XXI century.</p>
-                </div><!--/.navbar-header -->
-                <!------------------------------categories------------------------>
-                <div class="collapse navbar-collapse" id="navbar-admin">
-                    {% if categories is defined %}
-                        <ul class="nav navbar-nav navbar-left">
-                            <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-expanded="false"> <span class="glyphicon glyphicon-cutlery"></span> Menu<span
-                                            class="caret"></span></a>
-                                <ul class="dropdown-menu dropdown-cart" role="menu">
-
-                                    {% for category in categories %}
 
 
-                                        <li>
-                                            <a href="{{ path("show_meals_by_category", { 'category': category.id }) }}">{{ category.name }}</a>
-                                        </li>
-
-                                    {% endfor %}
-
-                                </ul>
-                            </li>
-                        </ul>
-
-                    {% endif %}
-
-
-                    {% if not app.user %}
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{ path('fos_user_security_login') }}" class="hidden-lg hidden-md"><span
-                                            class="glyphicon glyphicon-lock"></span>
-                                    Log
-                                    In</a></li>
-                            <li><a href="{{ path("fos_user_registration_register") }}" class="hidden-lg hidden-md"><span
-                                            class="glyphicon glyphicon-pencil"></span>
-                                    Sign Up</a></li>
-                        </ul>
-
-                    {% endif %}
-
-                    <!---------------------------------LOGIN - SIGNUP--------------------------------->
-                    {% if not app.user %}
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="hidden-sm hidden-xs">
-                                <button type="button" class="btn btn-success navbar-btn">
-                                    <a href="{{ path('fos_user_security_login') }}" class="link-button-color"><span
-                                                class="glyphicon glyphicon-lock"></span>
-                                        Log
-                                        In</a>
-                                </button>
-                                <button type="button" class="btn btn-danger navbar-btn">
-                                    <a href="{{ path("fos_user_registration_register") }}"
-                                       class="link-button-color"><span
-                                                class="glyphicon glyphicon-pencil"></span>
-                                        Sign Up</a>
-                                </button>
-                            </li>
-                        </ul>
-
-                    {% else %}
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="hidden-sm hidden-xs">
-                                <button type="button" class="btn btn-danger navbar-btn">
-                                    <a href="{{ path('fos_user_security_logout') }}" class="link-button-color"><span
-                                                class="glyphicon glyphicon-log-out"></span>
-                                        Log
-                                        Out</a>
-                                </button>
-                            </li>
-                        </ul>
-
-                        <!----------------------------ORDER ELEMENTS INFO ON NAVBAR------------------------------->
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-expanded="false"> <span class="glyphicon glyphicon-cutlery"></span> Your
-                                    Order<span class="caret"></span></a>
-                                <ul class="dropdown-menu dropdown-cart" role="menu">
-                                    <li>
-                                      <span class="item">
-                                            <span class="item-left">
-                                                <img src="http://lorempixel.com/50/50/" alt=""/>
-                                                <span class="item-info">
-                                                    <span>ELEMENT</span><br>
-                                                </span>
-                                            </span>
-                                            <span class="item-right">
-                                                <button class="btn btn-xs btn-danger pull-right">x</button>
-                                            </span>
-                                          <hr>
-
-                                    </span>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    {% endif %}
-
-                </div><!--/.container-fluid -->
-            </div>
-        </nav><!--/.navbar -->
-    </div>
-</div>
-
-
+{% include "navigation/navigation.html.twig" %}
 {% block body %}
-
 {% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
