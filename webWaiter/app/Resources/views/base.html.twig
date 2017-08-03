@@ -12,22 +12,23 @@
             text-decoration: none;
             color: #333;
         }
+
         .productbox {
-            background-color:#ffffff;
-            padding:10px;
-            margin:5px 0;
+            background-color: #ffffff;
+            padding: 10px;
+            margin: 5px 0;
             border: 1px solid #cfcfcf;
             -moz-box-shadow: 2px 2px 4px 0px #cfcfcf;
             -webkit-box-shadow: 2px 2px 4px 0px #cfcfcf;
             -o-box-shadow: 2px 2px 4px 0px #cfcfcf;
             box-shadow: 2px 2px 4px 0px #cfcfcf;
-            filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=4);
+            filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=4);
         }
 
         .producttitle {
-            font-weight:bold;
-            font-size:1.2em;
-            padding:5px 0 5px 0;
+            font-weight: bold;
+            font-size: 1.2em;
+            padding: 5px 0 5px 0;
         }
 
         .producttext {
@@ -35,16 +36,17 @@
         }
 
         .productprice {
-            border-top:1px solid #dadada;
-            padding-top:5px;
+            border-top: 1px solid #dadada;
+            padding-top: 5px;
         }
 
         .pricetext {
-            font-weight:bold;
-            font-size:1.4em;
+            font-weight: bold;
+            font-size: 1.4em;
         }
-        .wrap{
-            word-wrap:break-word;
+
+        .wrap {
+            word-wrap: break-word;
         }
 
     </style>
@@ -58,96 +60,94 @@
 <div class="container">
     <div class="row">
         <br>
+        <!---------------------------------MENU--------------------------------->
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-admin">
-                        <span class="sr-only">Toggle Menu</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="/"class="navbar-brand">WebWaiter <span class="glyphicon glyphicon-hand-up"></span></a>
+                    <a href="/" class="navbar-brand">WebWaiter <span class="glyphicon glyphicon-hand-up"></span></a>
                     <p class="navbar-text">It's XXI century.</p>
                 </div><!--/.navbar-header -->
+                <!------------------------------categories------------------------>
                 <div class="collapse navbar-collapse" id="navbar-admin">
-                    <!---------------------------------MENU--------------------------------->
-                    <ul class="nav navbar-nav">
+                    {% if categories is defined %}
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"> <span class="glyphicon glyphicon-cutlery"></span> Menu<span
+                                            class="caret"></span></a>
+                                <ul class="dropdown-menu dropdown-cart" role="menu">
+
+                                    {% for category in categories %}
 
 
-                        <!------------------------------categories------------------------>
+                                        <li>
+                                            <a href="{{ path("show_meals_by_category", { 'category': category.id }) }}">{{ category.name }}</a>
+                                        </li>
 
-                        {% if categories is defined %}
+                                    {% endfor %}
 
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-                                <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                {% for category in categories %}
+                                </ul>
+                            </li>
+                        </ul>
 
-                                    <li><a href="{{ path("show_meals_by_category", { 'category': category.id }) }}">{{ category.name }}</a></li>
-
-                                {% endfor %}
-                            </ul>
-                        </div>
-
-                        {%  endif %}
+                    {% endif %}
 
 
-
-
-
-
-                        {% if not app.user %} {#if logged #}
-                            <li><a href="{{ path('fos_user_security_login') }}" class="hidden-lg hidden-md"><span class="glyphicon glyphicon-lock"></span>
+                    {% if not app.user %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{ path('fos_user_security_login') }}" class="hidden-lg hidden-md"><span
+                                            class="glyphicon glyphicon-lock"></span>
                                     Log
                                     In</a></li>
                             <li><a href="{{ path("fos_user_registration_register") }}" class="hidden-lg hidden-md"><span
                                             class="glyphicon glyphicon-pencil"></span>
                                     Sign Up</a></li>
+                        </ul>
 
-                        {% endif %}
-
-                    </ul>
+                    {% endif %}
 
                     <!---------------------------------LOGIN - SIGNUP--------------------------------->
                     {% if not app.user %}
                         <ul class="nav navbar-nav navbar-right">
                             <li class="hidden-sm hidden-xs">
                                 <button type="button" class="btn btn-success navbar-btn">
-                                    <a href="{{ path('fos_user_security_login') }}" class="link-button-color"><span class="glyphicon glyphicon-lock"></span>
+                                    <a href="{{ path('fos_user_security_login') }}" class="link-button-color"><span
+                                                class="glyphicon glyphicon-lock"></span>
                                         Log
                                         In</a>
                                 </button>
                                 <button type="button" class="btn btn-danger navbar-btn">
-                                    <a href="{{ path("fos_user_registration_register") }}" class="link-button-color"><span
+                                    <a href="{{ path("fos_user_registration_register") }}"
+                                       class="link-button-color"><span
                                                 class="glyphicon glyphicon-pencil"></span>
                                         Sign Up</a>
                                 </button>
                             </li>
                         </ul>
 
-                        {% else %}
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="hidden-sm hidden-xs">
-                                    <button type="button" class="btn btn-danger navbar-btn">
-                                        <a href="{{ path('fos_user_security_logout') }}" class="link-button-color"><span class="glyphicon glyphicon-log-out"></span>
-                                            Log
-                                            Out</a>
-                                    </button>
-                                </li>
-                            </ul>
-                    {% endif %}
+                    {% else %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="hidden-sm hidden-xs">
+                                <button type="button" class="btn btn-danger navbar-btn">
+                                    <a href="{{ path('fos_user_security_logout') }}" class="link-button-color"><span
+                                                class="glyphicon glyphicon-log-out"></span>
+                                        Log
+                                        Out</a>
+                                </button>
+                            </li>
+                        </ul>
 
-                    <!----------------------------ORDER ELEMENTS INFO ON NAVBAR------------------------------->
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-cutlery"></span> Your Order<span class="caret"></span></a>
-                            <ul class="dropdown-menu dropdown-cart" role="menu">
-                                <li>
+                        <!----------------------------ORDER ELEMENTS INFO ON NAVBAR------------------------------->
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"> <span class="glyphicon glyphicon-cutlery"></span> Your
+                                    Order<span class="caret"></span></a>
+                                <ul class="dropdown-menu dropdown-cart" role="menu">
+                                    <li>
                                       <span class="item">
                                             <span class="item-left">
-                                                <img src="http://lorempixel.com/50/50/" alt="" />
+                                                <img src="http://lorempixel.com/50/50/" alt=""/>
                                                 <span class="item-info">
                                                     <span>ELEMENT</span><br>
                                                 </span>
@@ -158,10 +158,11 @@
                                           <hr>
 
                                     </span>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    {% endif %}
 
                 </div><!--/.container-fluid -->
             </div>
@@ -170,10 +171,9 @@
 </div>
 
 
-
 {% block body %}
 
-    {% endblock %}
+{% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
 </html>
