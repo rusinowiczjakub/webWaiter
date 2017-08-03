@@ -77,16 +77,26 @@
 
                         <!------------------------------categories------------------------>
 
-
-
                         {% if categories is defined %}
-                        {% for category in categories %}
 
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                {% for category in categories %}
 
-                            <li><a href="{{ path("show_meals_by_category", { 'category': category.id }) }}">{{ category.name }}</a></li>
+                                    <li><a href="{{ path("show_meals_by_category", { 'category': category.id }) }}">{{ category.name }}</a></li>
 
-                        {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+
                         {%  endif %}
+
+
+
+
+
 
                         {% if not app.user %} {#if logged #}
                             <li><a href="{{ path('fos_user_security_login') }}" class="hidden-lg hidden-md"><span class="glyphicon glyphicon-lock"></span>
