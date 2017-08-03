@@ -15,9 +15,11 @@
 </head>
 <body>
 
-
+{% if order_element is defined %}
+{% include "navigation/navigation.html.twig" with [{'order_element': order_element}] %}
+{% else %}
 {% include "navigation/navigation.html.twig" %}
-
+{% endif %}
 {% include "messages/fosUSerMessage.html.twig" %}
 
 

@@ -69,13 +69,14 @@
                                    aria-expanded="false"> <span class="glyphicon glyphicon-cutlery"></span> Your
                                     Order<span class="caret"></span></a>
                                 <ul class="dropdown-menu dropdown-cart" role="menu">
-                                    
+                                    {% if order_element is defined %}
+                                    {% for element in order_element  %}
                                     <li>
                                       <span class="item">
                                             <span class="item-left">
                                                 <img src="http://lorempixel.com/50/50/" alt=""/>
                                                 <span class="item-info">
-                                                    <span>ELEMENT</span><br>
+                                                    <span>{{ element.meal_id }}</span><br>
                                                 </span>
                                             </span>
                                             <span class="item-right">
@@ -85,6 +86,19 @@
 
                                     </span>
                                     </li>
+                                    {% endfor %}
+                                        {% else %}
+                                            <li>
+                                      <span class="item">
+                                            <span class="item-left">
+                                                <span class="item-info">
+                                                    <span>Basket Empty</span><br>
+                                                </span>
+                                            </span>
+
+                                    </span>
+                                            </li>
+                                    {% endif %}
                                 </ul>
                             </li>
                         </ul>

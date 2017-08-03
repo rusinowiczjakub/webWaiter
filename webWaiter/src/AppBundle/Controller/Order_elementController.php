@@ -65,7 +65,7 @@ class Order_elementController extends BaseController
 
         $order_element = $this->getDoctrine()->getRepository()->findBy(['order_id'=>$order]);
 
-        return $this->render(':navigation:navigation.html.twig', ['order_element'=>$order_element]);
+        return $this->render('::base.html.twig', ['order_element'=>$order_element]);
     }
 
     /**
