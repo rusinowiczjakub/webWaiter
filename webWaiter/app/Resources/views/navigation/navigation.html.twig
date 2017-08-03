@@ -48,32 +48,16 @@
                     {% endif %}
 
                     <!---------------------------------LOGIN - SIGNUP--------------------------------->
-                    {% if not app.user %}
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="hidden-sm hidden-xs">
-                                <button type="button" class="btn btn-success navbar-btn">
-                                    <a href="{{ path('fos_user_security_login') }}" class="link-button-color"><span
-                                                class="glyphicon glyphicon-lock"></span>
-                                        Log
-                                        In</a>
-                                </button>
-                                <button type="button" class="btn btn-danger navbar-btn">
-                                    <a href="{{ path("fos_user_registration_register") }}"
-                                       class="link-button-color"><span
-                                                class="glyphicon glyphicon-pencil"></span>
-                                        Sign Up</a>
-                                </button>
-                            </li>
-                        </ul>
 
-                    {% else %}
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
                         <ul class="nav navbar-nav navbar-right">
                             <li class="hidden-sm hidden-xs">
                                 <button type="button" class="btn btn-danger navbar-btn">
                                     <a href="{{ path('fos_user_security_logout') }}" class="link-button-color"><span
                                                 class="glyphicon glyphicon-log-out"></span>
-                                        Log
-                                        Out</a>
+                                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                                        |{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
                                 </button>
                             </li>
                         </ul>
@@ -101,6 +85,23 @@
                                     </span>
                                     </li>
                                 </ul>
+                            </li>
+                        </ul>
+                    {% else %}
+                        <a href="{{ path('fos_user_security_login') }}"></a>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="hidden-sm hidden-xs">
+                                <button type="button" class="btn btn-success navbar-btn">
+                                    <a href="{{ path('fos_user_security_login') }}" class="link-button-color"><span
+                                                class="glyphicon glyphicon-lock"></span>
+                                        {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                </button>
+                                <button type="button" class="btn btn-danger navbar-btn">
+                                    <a href="{{ path("fos_user_registration_register") }}"
+                                       class="link-button-color"><span
+                                                class="glyphicon glyphicon-pencil"></span>
+                                        {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                                </button>
                             </li>
                         </ul>
                     {% endif %}

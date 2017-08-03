@@ -17,6 +17,18 @@
 
 
 {% include "navigation/navigation.html.twig" %}
+
+{% include "messages/fosUSerMessage.html.twig" %}
+
+
+<div class="container">
+    {% block fos_user_content %}
+    {% endblock fos_user_content %}
+</div>l
+
+
+
+
 {% block body %}
 {% endblock %}
 {% block javascripts %}{% endblock %}
