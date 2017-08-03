@@ -36,13 +36,17 @@ class Client_orderController extends BaseController
     /**
      * Creates a new client_order entity.
      *
-     * @Route("/new/{meal}", name="client_order_new")
-     * @Method("GET")
+     * @Route("/new", name="client_order_new")
+     * @Method("POST")
      */
-    public function newAction(Request $request, Meal $meal)
+    public function newAction(Request $request)
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);
+
+        dump($request->request->get('quantity'));
+        dump($request->request->get('meal'));
+        die;
 
         if(empty($order)) {
             $client_order = new Client_order();
