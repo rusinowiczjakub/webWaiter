@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Meal;
 use AppBundle\Entity\Order_element;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -34,46 +35,33 @@ class Order_elementController extends BaseController
     /**
      * Creates a new order_element entity.
      *
-     * @Route("/new", name="order_element_new")
+     * @Route("/new/{meal}", name="order_element_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Meal $meal)
     {
-        $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findByStatus(0);
-        $meal = $this->getDoctrine()->getRepository('AppBundle:Meal')->find($_GET['meal']);
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);
         $order_element = new Order_element();
         $order_element->setQuantity(1);
         $order_element->setMeals($meal);
-        $order_element->setOrder();
+        $order_element->setOrder($order[0]);
+        $this->save($order_element);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($order_element);
-            $em->flush();
 
-            return $this->redirectToRoute('order_element_show', array('id' => $order_element->getId()));
-        }
-
-        return $this->render('order_element/new.html.twig', array(
-            'order_element' => $order_element,
-            'form' => $form->createView(),
-        ));
+        return $this->redirectToRoute('homepage');
     }
 
     /**
      * Finds and displays a order_element entity.
      *
-     * @Route("/{id}", name="order_element_show")
+     * @Route("/", name="order_element_show")
      * @Method("GET")
      */
-    public function showAction(Order_element $order_element)
+    public function showAction()
     {
-        $deleteForm = $this->createDeleteForm($order_element);
-
-        return $this->render('order_element/show.html.twig', array(
-            'order_element' => $order_element,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);
     }
 
     /**

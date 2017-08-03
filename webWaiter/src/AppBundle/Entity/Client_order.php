@@ -66,7 +66,7 @@ class Client_order
      *
      * @return Client_order
      */
-    public function setPrice($price)
+    public function setPrice($price = null)
     {
         $this->price = $price;
 
@@ -90,7 +90,7 @@ class Client_order
      *
      * @return Client_order
      */
-    public function setStatus($status=0)
+    public function setStatus($status = null)
     {
         $this->status = $status;
 
