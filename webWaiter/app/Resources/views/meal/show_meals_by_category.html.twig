@@ -7,8 +7,8 @@
         {% for meal in meals %}
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-5 col-md-3">
-            <div class="productbox">
+        <div class="col-xs-12 col-sm-5 col-md-3" >
+            <div class="productbox" style="height: 25em;">
                 <img src="http://lorempixel.com/460/250/" class="img-responsive">
                 <div class="producttitle">{{ meal.mealname }}</div>
                 {#<p class="text-justify">The place to be.</p>#}
@@ -17,8 +17,8 @@
                 </description>
 
 
-                <div class="productprice">
-                    <div>
+                <div class="thumb-nail">
+                    <div style="margin-top: 0.4em;">
                         <strong>Price: {{ meal.price }} $</strong><br>
                     </div>
                     {% if not app.user %}
@@ -28,20 +28,21 @@
                     {% elseif app.user %}
 
                     <div class="pull-right">
-                        <form action="{{ path("client_order_new") }}" method="POST" class="form-group form-inline">
+                        <form action="{{ path("client_order_new") }}" method="POST" class="form-inline">
                             <input type="hidden" name="meal" value="{{ meal.id }}"/>
                             <div class="form-group">
-                                <input type="number" class="form-control" name="quantity" step="1" min="1" placeholder="quantity">
+                                <input type="number" class="form-control" name="quantity" step="1" min="1" value="1"  required
+                                       data-fv-notempty-message="The quentity is required">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="margin-top: 0.4em">
                                 <button type="submit" class="btn btn-success">Order <span class="glyphicon glyphicon-cutlery"></span></button>
                             </div>
                         </form>
                     </div>
 
                     {% endif %}
-                    <div class="pricetext">
-                        <a href="" class="btn btn-warning btm-sm" role="button">View <span class="glyphicon glyphicon-info-sign"></span></a>
+                    <div class="pull-left">
+                        <a href="" style="margin-top: 0.5em;" class="btn btn-warning btm-sm" role="button">View <span class="glyphicon glyphicon-info-sign"></span></a>
                     </div>
 
                 </div>
