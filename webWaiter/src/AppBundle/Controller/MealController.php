@@ -68,8 +68,7 @@ class MealController extends BaseController
         $deleteForm = $this->createDeleteForm($meal);
 
         return $this->render('meal/show.html.twig', array(
-            'meal' => $meal,
-            'delete_form' => $deleteForm->createView(),
+            'meal' => $meal
         ));
     }
 

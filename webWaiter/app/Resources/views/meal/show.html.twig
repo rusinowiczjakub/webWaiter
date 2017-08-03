@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Meal</h1>
 
-    <table>
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -27,18 +27,8 @@
             </tr>
         </tbody>
     </table>
+    <div class="center">
+    <img src="http://lorempixel.com/400/200/" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('meal_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('meal_edit', { 'id': meal.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}
