@@ -19,4 +19,9 @@ class BaseController extends Controller
 
         return true;
     }
+    protected function getUserOrder(){
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);
+        return $order;
+    }
 }
