@@ -62,6 +62,10 @@ class Order_elementController extends BaseController
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);
+
+        $order_element = $this->getDoctrine()->getRepository()->findBy(['order_id'=>$order]);
+
+        return $this->render(':navigation:navigation.html.twig', ['order_element'=>$order_element]);
     }
 
     /**
