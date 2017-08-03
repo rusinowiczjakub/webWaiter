@@ -28,9 +28,9 @@
                     {% elseif app.user %}
 
                     <div class="pull-right">
-                        <form action="{{ path("client_order_new") }}" method="POST" class="form-group">
+                        <form action="{{ path("client_order_new") }}" method="POST" class="form-group form-inline">
                             <input type="hidden" name="meal" value="{{ meal.id }}"/>
-                            <div class="form-group">'
+                            <div class="form-group">
                                 <input type="number" class="form-control" name="quantity" step="1" min="1" placeholder="quantity">
                             </div>
                             <div class="form-group">
