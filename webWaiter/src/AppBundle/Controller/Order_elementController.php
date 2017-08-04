@@ -32,11 +32,9 @@ class Order_elementController extends BaseController
 
         $order_elements = $this->getDoctrine()->getRepository('AppBundle:Order_element')->findBy(['order'=>$order]);
 
-//        dump($price);
-//        die;
 
 
-        return $this->render('/order_element/order_info.html.twig', ['order_elements'=>$order_elements]);
+        return $this->render('/order_element/order_info.html.twig', ['order_elements'=>$order_elements, "categories"=>$this->getAllCategories()]);
     }
 
     /**
@@ -69,16 +67,13 @@ class Order_elementController extends BaseController
         //get price of element * quentity
         $priceOfOneElement = $mealObject[0]->getPrice();
         $priceOfThisOrder = $priceOfOneElement * $quantity;
-
         $priceBeforeOrder = $order[0]->getPrice();
-
         //update price in Client_order
         $updatedPrice = $priceBeforeOrder + $priceOfThisOrder;
         //save updated price
-        $order[0]->setPrice = $updatedPrice;
+        $order[0]->setPrice($updatedPrice);
         //save changes to DB
         $this->save($order[0]);
-
 
         $session->remove('meal');
         $session->remove('quantity');
