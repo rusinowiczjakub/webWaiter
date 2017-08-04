@@ -33,7 +33,7 @@
 
                     {% endif %}
 
-
+<!-------------------------------------------NO USER LOGGED ---------------------------------->
                     {% if not app.user %}
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{ path('fos_user_security_login') }}" class="hidden-lg hidden-md"><span
@@ -51,6 +51,14 @@
 
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
+                    {% if is_granted('ROLE_ADMIN') %}
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="hidden-sm hidden-xs">
+                                <button class="btn btn-success navbar-btn"><a href="/admin" style="color: white;"><strong>Go to Admin Panel </strong></a></button>
+                            </li>
+                        </ul>
+                    {% endif %}
                         <ul class="nav navbar-nav navbar-right">
                             <li class="hidden-sm hidden-xs">
                                 <button type="button" class="btn btn-danger navbar-btn">
@@ -59,6 +67,7 @@
                                         {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
                                         |{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
                                 </button>
+                                &nbsp
                             </li>
                         </ul>
 
