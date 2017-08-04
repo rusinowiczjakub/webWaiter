@@ -65,46 +65,6 @@ class Client_orderController extends BaseController
         return $this->redirectToRoute('order_element_new');
     }
 
-    /**
-     * Finds and displays a client_order entity.
-     *
-     * @Route("/{id}", name="client_order_show")
-     * @Method("GET")
-     */
-//    public function showAction()
-//    {
-//        $deleteForm = $this->createDeleteForm($client_order);
-//
-//        return $this->render('client_order/show.html.twig', array(
-//            'client_order' => $client_order,
-//            'delete_form' => $deleteForm->createView(),
-//        ));
-//    }
-
-    /**
-     * Displays a form to edit an existing client_order entity.
-     *
-     * @Route("/{id}/edit", name="client_order_edit")
-     * @Method({"GET", "POST"})
-     */
-    public function editAction(Request $request, Client_order $client_order)
-    {
-        $deleteForm = $this->createDeleteForm($client_order);
-        $editForm = $this->createForm('AppBundle\Form\Client_orderType', $client_order);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('client_order_edit', array('id' => $client_order->getId()));
-        }
-
-        return $this->render('client_order/edit.html.twig', array(
-            'client_order' => $client_order,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
 
     /**
      * Deletes a client_order entity.
@@ -134,20 +94,23 @@ class Client_orderController extends BaseController
         return $this->redirectToRoute('homepage');
     }
 
+
     /**
-     * Creates a form to delete a client_order entity.
-     *
-     * @param Client_order $client_order The client_order entity
-     *
-     * @return \Symfony\Component\Form\Form The form
+     * @Route("/order_status", name="order_status")
+     * @Method({"GET", "POST"})
      */
-    private function createDeleteForm(Client_order $client_order)
+    public function orderPayAction()
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('client_order_delete', array('id' => $client_order->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $order = $this->getDoctrine()->getRepository('AppBundle:Client_order')->findBy(['status'=>0, 'user'=>$user]);
+
+        $order[0]->setStatus(2);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($order[0]);
+        $em->flush();
+
+        return $this->render('client_order/order_status.html.twig', ['order'=>$order[0]]);
+
     }
 
 
