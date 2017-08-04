@@ -77,3 +77,11 @@ fos_user:
     from_email:
         address: "projectWebWaiter@email.com"
         sender_name: "Waiter"
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+        # ...
