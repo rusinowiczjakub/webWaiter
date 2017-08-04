@@ -37,9 +37,9 @@
                                 <td class="col-md-1 text-center"><strong>{{ element.meals.price }} zł</strong></td>
                                 <td class="col-md-1 text-center"><strong>{{ element.meals.price * element.quantity }}</strong></td>
                                 <td class="col-sm-1 col-md-1">
-                                    <button type="button" class="btn btn-danger">
+                                    <a href="{{ path("order_element_delete", {'id':element.id}) }}" class="btn btn-danger">
                                         <i class="glyphicon glyphicon-remove"></i>
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -50,7 +50,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td class="text-center"><h5><strong>$24.59</strong></h5></td>
+                                <td class="text-center"><h5><strong>!!!!PRICE!!!!!</strong></h5></td>
                                 <td></td>
                             </tr>
                             </tbody>
