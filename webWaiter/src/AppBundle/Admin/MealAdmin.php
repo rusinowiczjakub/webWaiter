@@ -34,13 +34,11 @@ class MealAdmin extends AbstractAdmin
         // ... configure $listMapper
 
         $listMapper
-            ->addIdentifier('category_id', 'sonata_type_model', array(
-                'class'=>'AppBundle\Entity\Category',
-                'choice_label'=>'name'
-            ))
+            ->addIdentifier('category_id')
             ->addIdentifier('meal_name')
             ->addIdentifier('description')
-            ->addIdentifier('price');
+            ->addIdentifier('price')
+            ->addIdentifier('image_id');
     }
 
     public function toString($object)

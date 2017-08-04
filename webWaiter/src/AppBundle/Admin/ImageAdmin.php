@@ -6,6 +6,8 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use AppBundle\Entity\Image;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ImageAdmin extends AbstractAdmin
 {
@@ -13,13 +15,16 @@ class ImageAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('file', 'file', array(
-                'required' => false
+                'required' => false,
             ))
             ->add('meal', EntityType::class, array(
-                'choice_label'=>meal_name,
+                'choice_label'=>"mealName",
                 'class'=>"AppBundle\Entity\Meal"
             ));
     }
+
+
+
 
     public function prePersist($image)
     {

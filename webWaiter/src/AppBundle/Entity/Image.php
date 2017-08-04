@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Image
@@ -12,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Image
 {
+    const SERVER_PATH_TO_IMAGE_FOLDER = '/webWaiter/webWaiter/web/photos';
 
     /**
      * One Image has One Meal.
@@ -105,7 +107,6 @@ class Image
     }
     // src/AppBundle/Bundle/Entity/Image.php
 
-    const SERVER_PATH_TO_IMAGE_FOLDER = '/webWaiter/webWaiter/web/photos';
 
     /**
      * Unmapped property to handle file uploads

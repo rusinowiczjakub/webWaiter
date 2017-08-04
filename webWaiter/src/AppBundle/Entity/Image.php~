@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Image
@@ -177,4 +178,28 @@ class Image
 // ... the rest of your class lives under here, including the generated fields
 //     such as filename and updated
 
+
+    /**
+     * Set meal
+     *
+     * @param \AppBundle\Entity\Meal $meal
+     *
+     * @return Image
+     */
+    public function setMeal(\AppBundle\Entity\Meal $meal = null)
+    {
+        $this->meal = $meal;
+
+        return $this;
+    }
+
+    /**
+     * Get meal
+     *
+     * @return \AppBundle\Entity\Meal
+     */
+    public function getMeal()
+    {
+        return $this->meal;
+    }
 }
