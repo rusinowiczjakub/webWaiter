@@ -16,6 +16,13 @@ class Meal
     // ...
 
     /**
+     * One Meal has One Image.
+     * @ORM\OneToOne(targetEntity="Image", mappedBy="meal")
+     */
+    private $image;
+
+
+    /**
      * Many Meals have One Category.
      * @ORM\ManyToOne(targetEntity="Category")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
@@ -69,12 +76,6 @@ class Meal
      */
     private $price;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="img", type="string", length=255)
-     */
-    private $img;
 
 
     /**
@@ -159,29 +160,7 @@ class Meal
         return $this->price;
     }
 
-    /**
-     * Set img
-     *
-     * @param string $img
-     *
-     * @return Meal
-     */
-    public function setImg($img)
-    {
-        $this->img = $img;
 
-        return $this;
-    }
-
-    /**
-     * Get img
-     *
-     * @return string
-     */
-    public function getImg()
-    {
-        return $this->img;
-    }
 
     /**
      * Set category
@@ -205,5 +184,29 @@ class Meal
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \AppBundle\Entity\Image $image
+     *
+     * @return Meal
+     */
+    public function setImage(\AppBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \AppBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

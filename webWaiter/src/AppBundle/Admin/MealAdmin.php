@@ -23,8 +23,8 @@ class MealAdmin extends AbstractAdmin
             ->add('meal_name', TextType::class)
             ->add('description', TextType::class)
             ->add('price', NumberType::class)
-            ->add('img', HiddenType::class, array(
-                'data'=>'0'
+            ->add('image', 'sonata_type_admin', array(
+                'delete' => false
             ));
 
     }
@@ -49,4 +49,46 @@ class MealAdmin extends AbstractAdmin
             ? $object->getMealName()
             : 'Meal'; // shown in the breadcrumb on the create view
     }
+
+
+    public function prePersist($page)
+    {
+        $this->manageEmbeddedImageAdmins($page);
+    }
+
+    public function preUpdate($page)
+    {
+        $this->manageEmbeddedImageAdmins($page);
+    }
+
+    private function manageEmbeddedImageAdmins($page)
+    {
+        // Cycle through each field
+        foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
+            // detect embedded Admins that manage Images
+            if ($fieldDescription->getType() === 'sonata_type_admin' &&
+                ($associationMapping = $fieldDescription->getAssociationMapping()) &&
+                $associationMapping['targetEntity'] === 'AppBundle\Entity\Image'
+            ) {
+                $getter = 'get'.$fieldName;
+                $setter = 'set'.$fieldName;
+
+                /** @var Image $image */
+                $image = $page->$getter();
+
+                if ($image) {
+                    if ($image->getFile()) {
+                        // update the Image to trigger file management
+                        $image->refreshUpdated();
+                    } elseif (!$image->getFile() && !$image->getFilename()) {
+                        // prevent Sf/Sonata trying to create and persist an empty Image
+                        $page->$setter(null);
+                    }
+                }
+            }
+        }
+    }
+
+
+
 }
