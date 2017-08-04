@@ -65,6 +65,21 @@ class Order_elementController extends BaseController
         $order_element->setOrder($order[0]);
         $this->save($order_element);
 
+
+        //get price of element * quentity
+        $priceOfOneElement = $mealObject[0]->getPrice();
+        $priceOfThisOrder = $priceOfOneElement * $quantity;
+
+        $priceBeforeOrder = $order[0]->getPrice();
+
+        //update price in Client_order
+        $updatedPrice = $priceBeforeOrder + $priceOfThisOrder;
+        //save updated price
+        $order[0]->setPrice = $updatedPrice;
+        //save changes to DB
+        $this->save($order[0]);
+
+
         $session->remove('meal');
         $session->remove('quantity');
 
